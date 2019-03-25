@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.SessionMapper">
+
+    <select id="querySessionBySession" resultType="Session">
+        select session_id
+        FROM session
+        where session_id = #{sessionId}
+    </select>
+
+    <insert id="insertSession" parameterType="Session">
+        insert into session(session_id)
+        values (#{sessionId});
+    </insert>
+</mapper>
