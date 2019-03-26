@@ -1,5 +1,6 @@
 package com.example.demo.controller.ConnectContoller;
 
+import com.example.demo.entity.Message;
 import com.example.demo.libEntity.Current;
 import com.example.demo.libEntity.History;
 import com.example.demo.libEntity.Number;
@@ -24,8 +25,8 @@ public class LibController {
     //获取验证码
 
     @RequestMapping("/init")
-    public void connectIndex(HttpSession httpSession){
-        libService.connectIndex(httpSession);
+    public Message connectIndex(HttpSession httpSession){
+        return libService.connectIndex(httpSession);
     }
 
     @RequestMapping("/captcha")

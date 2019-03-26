@@ -27,8 +27,8 @@ import java.util.regex.Pattern;
 public class JwglService {
     private static Logger logger = LoggerFactory.getLogger(JwglController.class);
 
-    @Autowired
-    private SessionMapper sessionMapper;
+//    @Autowired
+//    private SessionMapper sessionMapper;
 
     private HttpSession httpSession;
     private String stuNum;
@@ -64,7 +64,7 @@ public class JwglService {
             this.httpSession = httpSession;
             Session session = new Session();
             session.setSessionId(httpSession.getId());
-            sessionMapper.insertSession(session);
+//            sessionMapper.insertSession(session);
             httpSession.setAttribute("cookies",cookies);
             httpSession.setAttribute("viewstate",__VIEWSTATE);
             Message message = new Message();

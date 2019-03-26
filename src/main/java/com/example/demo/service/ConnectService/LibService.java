@@ -1,6 +1,7 @@
 package com.example.demo.service.ConnectService;
 
 import com.example.demo.dao.SessionMapper;
+import com.example.demo.entity.Message;
 import com.example.demo.libEntity.Current;
 import com.example.demo.libEntity.History;
 import com.example.demo.libEntity.Number;
@@ -20,8 +21,8 @@ import java.util.Map;
 
 @Service
 public class LibService {
-    @Autowired
-    private SessionMapper sessionMapper;
+//    @Autowired
+//    private SessionMapper sessionMapper;
 
     private Connection connection;
     private Connection.Response response;
@@ -34,7 +35,7 @@ public class LibService {
 //    }
 
 
-    public void connectIndex(HttpSession httpSession){
+    public Message connectIndex(HttpSession httpSession){
         try{
             connection = Jsoup.connect("http://opac.nufe.edu.cn/reader/login.php");
             response = connection.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0").execute();
@@ -46,9 +47,11 @@ public class LibService {
 //            sessionMapper.insertSession(session);
             httpSession.setAttribute("libCookies",cookies);
             httpSession.setAttribute("token",token);
+            return new Message().add("cookies",httpSession.getId());
         }catch (Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -66,7 +69,7 @@ public class LibService {
                 .userAgent("Mozilla").method(Connection.Method.GET).timeout(9000).execute();
         byte[] bytes = response.bodyAsBytes();
         //在本地建立文件夹
-          File file = new File("/home/captcha"+
+          File file = new File("C:\\Users\\一号公路上的桥断了\\Desktop\\"+
                   httpSession.getId().substring(0,12) + "captcha.png");
             if (file.exists()) {
                 file.delete();
