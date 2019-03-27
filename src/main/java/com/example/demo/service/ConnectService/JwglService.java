@@ -189,7 +189,7 @@ public class JwglService {
         List<Course> list = new LinkedList<>();
         for (int i = 0; i < elements.size(); i++) {
             if (i > 0) {
-                if (elements.get(i).text().contains("重修")) {
+                if (elements.get(i).text().contains("重修") || elements.get(i).text().contains("+")) {
                     continue;
                 }
                 if (elements.get(i).text().contains(";")) {
@@ -209,6 +209,10 @@ public class JwglService {
                             course.setCourseTime(elements.get(i).text().split(" ")[9].split(";")[a]);
                         }
 //                        course.setCourseTime(elements.get(i).text().split(" ")[8].split(";")[a]);
+                        System.out.println(course.getCourseTime());
+                        if(course.getCourseTime().length() == 0 || course.getCourseTime().substring(0,1) == null) {
+                            continue;
+                        }
                         int m = course.getCourseTime().indexOf("{");
                         int n = course.getCourseTime().indexOf("}");
                         String str9 = course.getCourseTime().substring(m + 1, n);
@@ -241,9 +245,13 @@ public class JwglService {
                                 courseDay = 7;
                                 break;
                         }
-                        if (course.getCourseTime().contains("10")) {
+                        if (course.getCourseTime().contains("10") ) {
+                            int s = course.getCourseTime().indexOf("10");
                             int q = course.getCourseTime().indexOf("第");
                             int w = course.getCourseTime().indexOf("节");
+                            if ( s > w) {
+                                continue;
+                            }
                             str7 = course.getCourseTime().substring(q + 1, q + 3);
                             str8 = course.getCourseTime().substring(w - 2, w);
                             length = Integer.parseInt(str8) - Integer.parseInt(str7) + 1;
@@ -286,6 +294,10 @@ public class JwglService {
                     } else {
                         course.setCourseTime(elements.get(i).text().split(" ")[9]);
                     }
+                    System.out.println(course.getCourseTime());
+                    if(course.getCourseTime().length() == 0 || course.getCourseTime().substring(0,1) == null) {
+                        continue;
+                    }
                     int m = course.getCourseTime().indexOf("{");
                     int n = course.getCourseTime().indexOf("}");
                     String str9 = course.getCourseTime().substring(m + 1, n);
@@ -319,8 +331,12 @@ public class JwglService {
                             break;
                     }
                     if (course.getCourseTime().contains("10")) {
+                        int s = course.getCourseTime().indexOf("10");
                         int q = course.getCourseTime().indexOf("第");
                         int w = course.getCourseTime().indexOf("节");
+                        if ( s > w) {
+                            continue;
+                        }
                         str7 = course.getCourseTime().substring(q + 1, q + 3);
                         str8 = course.getCourseTime().substring(w - 2, w);
                         length = Integer.parseInt(str8) - Integer.parseInt(str7) + 1;
