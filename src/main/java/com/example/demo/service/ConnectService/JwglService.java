@@ -202,6 +202,7 @@ public class JwglService {
                     for (int a = 0; a < x; a++) {
                         Course course = new Course();
                         course.setCourseName(elements.get(i).text().split(" ")[2]);
+                        System.out.println(course.getCourseName());
                         course.setCourseTeacher(elements.get(i).text().split(" ")[5]);
                         if (elements.get(i).text().split(" ").length == 15) {
                             course.setCourseTime(elements.get(i).text().split(" ")[8].split(";")[a]);
@@ -280,7 +281,9 @@ public class JwglService {
                         }
                         course.setCourseDay(courseDay);
                         course.setCourseWeek(str9);
-                        course.setCourseArea(elements.get(i).text().split(" ")[9].split(";")[a]);
+                        if (elements.get(i).text().split(" ")[9].length() > 1) {
+                            course.setCourseArea(elements.get(i).text().split(" ")[9].split(";")[a]);
+                        }
 //                        courses[++j] = course;
                         list.add(course);
                     }
@@ -288,6 +291,7 @@ public class JwglService {
                     Course course = new Course();
 //                    System.out.println(elements.get(i).text().split(" ").length);
                     course.setCourseName(elements.get(i).text().split(" ")[2]);
+                    System.out.println(course.getCourseName());
                     course.setCourseTeacher(elements.get(i).text().split(" ")[5]);
                     if (elements.get(i).text().split(" ").length == 15) {
                         course.setCourseTime(elements.get(i).text().split(" ")[8]);
