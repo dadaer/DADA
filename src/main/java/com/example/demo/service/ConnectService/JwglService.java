@@ -415,7 +415,7 @@ public class JwglService {
      * @return
      * @throws IOException
      */
-    public List<Grade> getGrade(HttpSession httpSession,String ddlXN,String ddlXQ) throws IOException {
+    public List<Grade> getGrade(HttpSession httpSession) throws IOException {
         String __VIEWSTATE1 = null;
         try {
             String CourseURL = "http://210.28.81.11/xscj.aspx?xh=" + httpSession.getAttribute("stuNum") + "&xm="
@@ -437,8 +437,8 @@ public class JwglService {
         }
         Map<String, String> datas = new HashMap<>();
         datas.put("__VIEWSTATE", __VIEWSTATE1);
-        datas.put("ddlXN", ddlXN);
-        datas.put("ddlXQ", ddlXQ);
+        datas.put("ddlXN","2018-2019");
+        datas.put("ddlXQ", "1");
         datas.put("txtQSCJ", "0");
         datas.put("txtZZCJ", "100");
         datas.put("Button1", "%b0%b4%d1%a7%c6%da%b2%e9%d1%af");

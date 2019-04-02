@@ -52,8 +52,8 @@ public class JwglController {
     //获取学生成绩
     @RequestMapping("grade")
     @ResponseBody
-    public List<Grade> getGrade(HttpSession httpSession,String ddlXN,String ddlXQ) throws IOException {
-        return jwglService.getGrade(httpSession,ddlXN,ddlXQ);
+    public List<Grade> getGrade(HttpSession httpSession) throws IOException {
+        return jwglService.getGrade(httpSession);
     }
 
     //获取考试安排
