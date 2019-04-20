@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 @Service
 public class JwglService {
-    private static Logger logger = LoggerFactory.getLogger(JwglController.class);
+//    private static Logger logger = LoggerFactory.getLogger(JwglController.class);
 
 //    @Autowired
 //    private SessionMapper sessionMapper;

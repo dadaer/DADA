@@ -24,7 +24,7 @@ public class NcywService {
         try {
             //连接教务管理系统
 
-            connection = Jsoup.connect("http://www.njue.edu.cn/tglm/ncyw.htm");
+            connection = Jsoup.connect("http://www.nufe.edu.cn/tglm/ncyw.htm");
             //connection =  Jsoup.connect("http://xinwen.nufe.edu.cn/ncyw/index_2.jhtml");
             connection.header("User-Agent",// 配置模拟浏览器
                     "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0");
@@ -43,7 +43,7 @@ public class NcywService {
                 News news = new News();
                 news.setTitle(elements.get(i).select(".list-txt-1 h3").text());
                 news.setDate(elements.get(i).select(".list-date").text());
-                news.setSrc("www.njue.edu.cn" + elements.get(i).select("a").attr("href").substring(2));
+                news.setSrc("www.nufe.edu.cn" + elements.get(i).select("a").attr("href").substring(2));
                 list.add(news);
             }
             return list;
