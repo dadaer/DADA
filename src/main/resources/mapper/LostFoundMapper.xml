@@ -5,12 +5,13 @@
     <resultMap id="idResult" type="LostFound">
         <id property="id" column="id"></id>
         <result property="title" column="title"></result>
+        <result property="type" column="type"></result>
         <result property="imgUrl" column="imgUrl"></result>
-        <result property="time" column="time"></result>
+        <result property="postTime" column="post_time"></result>
     </resultMap>
 
     <select id="queryInfoByType" parameterType="int" resultMap="idResult">
-        select id,type,title,time,imgUrl
+        select id,type,title,imgUrl,post_time
         FROM lostfound
         where type = #{type}
     </select>
@@ -22,7 +23,7 @@
     </select>
 
     <insert id="addLostFound" parameterType="LostFound">
-        INSERT INTO lostfound(id,type,time,place,contact_info,title,content,imgUrl)
+        INSERT INTO lostfound(id,type,time,place,contact_info,title,content,imgUrl,post_time)
         VALUES
         (
             #{id},
@@ -32,7 +33,8 @@
             #{contactInfo},
             #{title},
             #{content},
-            #{imgUrl}
+            #{imgUrl},
+            #{postTime}
         )
     </insert>
 </mapper>

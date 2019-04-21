@@ -2,11 +2,9 @@ package com.example.demo.controller.ORMController;
 
 import com.example.demo.ORMEntity.LostFound;
 import com.example.demo.service.LostFoundServie;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +15,9 @@ public class LostFoundController {
     private LostFoundServie lostFoundServie;
 
     @RequestMapping("lostfoundinfos")
-    public List<LostFound> queryInfoByType(Integer type) {
+    public List<LostFound> queryInfoByType(@RequestParam(defaultValue = "1") int pageNo,
+                                           @RequestParam(defaultValue = "20") int pageSize ,Integer type) {
+        PageHelper.startPage(pageNo,pageSize);
         return lostFoundServie.queryInfoByType(type);
     }
 
@@ -27,17 +27,8 @@ public class LostFoundController {
     }
 
     @RequestMapping(value = "addLostFoundInfo",method = RequestMethod.POST)
-    public int queryInfoByType(LostFound lostFound) {
+    public int addLostFound(LostFound lostFound) {
         System.out.println(lostFound);
-//        LostFound lostFound1 = new LostFound();
-//        lostFound1.setId(lostFound.getId());
-//        lostFound1.setType(lostFound.getType());
-//        lostFound1.setTime(lostFound.getTime());
-//        lostFound1.setPlace(lostFound.getPlace());
-//        lostFound1.setContactInfo(lostFound.getContactInfo());
-//        lostFound1.setTitle(lostFound.getTitle());
-//        lostFound1.setContent(lostFound.getContent());
-//        lostFound1.setImgUrl(lostFound.getImgUrl());
         System.out.println(lostFound.getTitle());
         return lostFoundServie.addLostFound(lostFound);
     }

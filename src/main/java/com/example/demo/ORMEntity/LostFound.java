@@ -10,6 +10,15 @@ public class LostFound {
     private String title;
     private String content;
     private String imgUrl;
+    private String postTime;
+
+    public String getPostTime() {
+        return postTime;
+    }
+
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
+    }
 
     public int getId() {
         return id;

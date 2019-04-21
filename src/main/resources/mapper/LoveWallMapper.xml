@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.LoveWallMapper">
+
+
+    <select id="queryInfos"  resultType="LoveWall">
+        select id,content,imgUrl,post_time
+        FROM lovewall
+    </select>
+
+    <insert id="addLoveWall" parameterType="LoveWall">
+        INSERT INTO lovewall(id,content,imgUrl,post_time)
+        VALUES
+        (
+        #{id},
+        #{content},
+        #{imgUrl},
+        #{postTime}
+        )
+    </insert>
+</mapper>
