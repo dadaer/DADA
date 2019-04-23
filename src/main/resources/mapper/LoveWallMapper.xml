@@ -6,16 +6,18 @@
     <select id="queryInfos"  resultType="LoveWall">
         select id,content,imgUrl,post_time
         FROM lovewall
+        ORDER BY id DESC
     </select>
 
     <insert id="addLoveWall" parameterType="LoveWall">
-        INSERT INTO lovewall(id,content,imgUrl,post_time)
+        INSERT INTO lovewall(id,content,imgUrl,post_time,stu_num)
         VALUES
         (
         #{id},
         #{content},
         #{imgUrl},
-        #{postTime}
+        #{postTime},
+        #{stuNum},
         )
     </insert>
 </mapper>

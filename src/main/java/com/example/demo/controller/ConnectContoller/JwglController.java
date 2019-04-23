@@ -33,7 +33,7 @@ public class JwglController {
     //登录
     @RequestMapping("/login")
     public Message login(String stuNum, String password, String checkCode,
-                         String stuName,HttpSession httpSession) {
+                         String stuName,HttpSession httpSession) throws Exception {
         return jwglService.login(stuNum,password,checkCode,stuName,httpSession);
     }
 

@@ -14,6 +14,7 @@
         select id,type,title,imgUrl,post_time
         FROM lostfound
         where type = #{type}
+        ORDER BY id DESC
     </select>
 
     <select id="queryInfoById"  parameterType="int" resultType="LostFound">
@@ -23,7 +24,7 @@
     </select>
 
     <insert id="addLostFound" parameterType="LostFound">
-        INSERT INTO lostfound(id,type,time,place,contact_info,title,content,imgUrl,post_time)
+        INSERT INTO lostfound(id,type,time,place,contact_info,title,content,imgUrl,post_time,stu_num)
         VALUES
         (
             #{id},
@@ -34,7 +35,8 @@
             #{title},
             #{content},
             #{imgUrl},
-            #{postTime}
+            #{postTime},
+            #{stuNum},
         )
     </insert>
 </mapper>

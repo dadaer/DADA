@@ -1,9 +1,12 @@
 package com.example.demo.service.ConnectService;
 
 import com.example.demo.ORMEntity.Session;
+import com.example.demo.ORMEntity.User;
 import com.example.demo.controller.ConnectContoller.JwglController;
 import com.example.demo.dao.SessionMapper;
+import com.example.demo.dao.UserMapper;
 import com.example.demo.entity.*;
+import com.example.demo.utils.Base64Util;
 import com.example.demo.utils.DateUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +34,9 @@ public class JwglService {
 
 //    @Autowired
 //    private SessionMapper sessionMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     private HttpSession httpSession;
     private String stuNum;
@@ -111,13 +119,21 @@ public class JwglService {
      * @return
      */
     public Message  login(String stuNum, String password,
-                          String checkCode, String stuName,HttpSession httpSession) {
+                          String checkCode, String stuName,HttpSession httpSession) throws Exception {
         this.stuNum = stuNum;
 //        stuName = "";
         this.stuName = stuName;
         //填充post数据
         httpSession.setAttribute("stuNum",stuNum);
         httpSession.setAttribute("stuName",stuName);
+        User user1 = userMapper.queryUserByStuNum(stuNum);
+        if (user1 == null) {
+            User user = new User();
+            user.setStuNum(stuNum);
+            user.setPassword(Base64Util.encode(password));
+            user.setStuName(stuName);
+            userMapper.addUser(user);
+        }
         Map<String, String> datas = new HashMap<>();
         datas.put("__VIEWSTATE", (String) httpSession.getAttribute("viewstate"));
         datas.put("txtUserName", stuNum);

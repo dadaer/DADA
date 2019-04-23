@@ -4,6 +4,7 @@ public class LostFound {
 
     private int id;
     private int type;//1表示失物，2表示招领。
+    private String stuNum;
     private String time;
     private String place;
     private String contactInfo;
@@ -18,6 +19,14 @@ public class LostFound {
 
     public void setPostTime(String postTime) {
         this.postTime = postTime;
+    }
+
+    public String getStuNum() {
+        return stuNum;
+    }
+
+    public void setStuNum(String stuNum) {
+        this.stuNum = stuNum;
     }
 
     public int getId() {

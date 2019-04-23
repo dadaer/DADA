@@ -2,6 +2,7 @@ package com.example.demo.ORMEntity;
 
 public class LoveWall {
     private int id;
+    private String stuNum;
     private String content;
     private String imgUrl;
     private String postTime;
@@ -12,6 +13,14 @@ public class LoveWall {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getStuNum() {
+        return stuNum;
+    }
+
+    public void setStuNum(String stuNum) {
+        this.stuNum = stuNum;
     }
 
     public String getContent() {
