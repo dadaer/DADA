@@ -177,13 +177,38 @@ public class JwglService {
      * @throws IOException
      */
     public List<Course> getCourse(HttpSession httpSession) throws IOException {
+        String __VIEWSTATE1 = null;
+        try {
+            String CourseURL = "http://210.28.81.11/xsxkqk.aspx?xh=" + httpSession.getAttribute("stuNum") + "&xm="
+                    + URLEncoder.encode((String) httpSession.getAttribute("stuName"), "GB2312") + "&gnmkdm=N121615";
+            connection = Jsoup.connect(CourseURL);
+            response = connection.ignoreContentType(true).method(Connection.Method.GET)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0")
+                    .referrer("http://210.28.81.11/xs_main.aspx?xh=" + httpSession.getAttribute("stuNum"))
+                    .cookies((Map)(httpSession.getAttribute("cookies"))).postDataCharset("GB2312").timeout(9000).execute();
+            document = response.parse();
+            for (Element element : document.getElementsByTag("input")) {
+                if (element.attr("name").equals("__VIEWSTATE")) {
+                    __VIEWSTATE1 = element.val();
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<String, String> datas = new HashMap<>();
+        datas.put("__VIEWSTATE", __VIEWSTATE1);
+        datas.put("ddlXN","2018-2019");
+        datas.put("ddlXQ", "2");
+        datas.put("__EVENTTARGET", "ddlXQ");
+        datas.put("__EVENTARGUMENT", "");
         String CourseURL = "http://210.28.81.11/xsxkqk.aspx?xh=" + httpSession.getAttribute("stuNum") + "&xm="
                 + URLEncoder.encode((String) httpSession.getAttribute("stuName"), "GB2312") + "&gnmkdm=N121615";
         connection = Jsoup.connect(CourseURL);
         response = connection.ignoreContentType(true).method(Connection.Method.GET)
                 .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0")
                 .referrer("http://210.28.81.11/xs_main.aspx?xh=" + stuNum)
-                .cookies((Map)(httpSession.getAttribute("cookies"))).postDataCharset("GB2312").timeout(9000).execute();
+                .data(datas).cookies((Map)(httpSession.getAttribute("cookies"))).postDataCharset("GB2312").timeout(9000).execute();
         document = response.parse();
         Elements elements = document.select(".datelist tr");
         List<Course> list = new LinkedList<>();
