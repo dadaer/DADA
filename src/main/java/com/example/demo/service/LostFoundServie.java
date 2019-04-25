@@ -1,11 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.ORMEntity.LostFound;
+import com.github.pagehelper.Page;
 
-import java.util.List;
 
 public interface LostFoundServie {
-    List<LostFound> queryInfoByType(Integer type);
+    Page<LostFound> queryInfoByType(Integer type);
 
     LostFound queryInfoById(Integer id);
 

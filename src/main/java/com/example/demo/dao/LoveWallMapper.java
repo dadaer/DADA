@@ -1,12 +1,10 @@
 package com.example.demo.dao;
 
-import com.example.demo.ORMEntity.LostFound;
 import com.example.demo.ORMEntity.LoveWall;
-
-import java.util.List;
+import com.github.pagehelper.Page;
 
 public interface LoveWallMapper {
-    List<LoveWall> queryInfos();
+    Page<LoveWall> queryInfos();
 
     int addLoveWall(LoveWall loveWall);
 }

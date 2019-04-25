@@ -3,10 +3,9 @@ package com.example.demo.controller.ORMController;
 import com.example.demo.ORMEntity.LostFound;
 import com.example.demo.service.LostFoundServie;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class LostFoundController {
@@ -15,10 +14,11 @@ public class LostFoundController {
     private LostFoundServie lostFoundServie;
 
     @RequestMapping("lostfoundinfos")
-    public List<LostFound> queryInfoByType(@RequestParam(defaultValue = "1") int pageNo,
-                                           @RequestParam(defaultValue = "20") int pageSize ,Integer type) {
+    public PageInfo<LostFound> queryInfoByType(@RequestParam(defaultValue = "1") int pageNo,
+                                               @RequestParam(defaultValue = "20") int pageSize , Integer type) {
         PageHelper.startPage(pageNo,pageSize);
-        return lostFoundServie.queryInfoByType(type);
+        PageInfo<LostFound> lostFoundPageInfo = new PageInfo<>(lostFoundServie.queryInfoByType(type));
+        return lostFoundPageInfo;
     }
 
     @RequestMapping("lostfoundinfo")

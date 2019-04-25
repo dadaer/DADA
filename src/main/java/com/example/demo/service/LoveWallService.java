@@ -1,11 +1,10 @@
 package com.example.demo.service;
 
 import com.example.demo.ORMEntity.LoveWall;
-
-import java.util.List;
+import com.github.pagehelper.Page;
 
 public interface LoveWallService {
-    List<LoveWall> queryInfos();
+    Page<LoveWall> queryInfos();
 
     int addLoveWall(LoveWall loveWall);
 

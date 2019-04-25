@@ -1,10 +1,10 @@
 package com.example.demo.dao;
 
 import com.example.demo.ORMEntity.LostFound;
-import java.util.List;
+import com.github.pagehelper.Page;
 
 public interface LostFoundMapper {
-    List<LostFound> queryInfoByType(Integer type);
+    Page<LostFound> queryInfoByType(Integer type);
 
     LostFound queryInfoById(Integer id);
 

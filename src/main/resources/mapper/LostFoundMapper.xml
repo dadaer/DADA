@@ -36,7 +36,7 @@
             #{content},
             #{imgUrl},
             #{postTime},
-            #{stuNum},
+            #{stuNum}
         )
     </insert>
 </mapper>
