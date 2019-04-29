@@ -126,14 +126,6 @@ public class JwglService {
         //填充post数据
         httpSession.setAttribute("stuNum",stuNum);
         httpSession.setAttribute("stuName",stuName);
-        User user1 = userMapper.queryUserByStuNum(stuNum);
-        if (user1 == null) {
-            User user = new User();
-            user.setStuNum(stuNum);
-            user.setPassword(Base64Util.encode(password));
-            user.setStuName(stuName);
-            userMapper.addUser(user);
-        }
         Map<String, String> datas = new HashMap<>();
         datas.put("__VIEWSTATE", (String) httpSession.getAttribute("viewstate"));
         datas.put("txtUserName", stuNum);
@@ -171,6 +163,14 @@ public class JwglService {
 //                    e.printStackTrace();
 //                }
                 System.out.println("登录成功，欢迎你" + stuName + "!");
+                User user1 = userMapper.queryUserByStuNum(stuNum);
+                if (user1 == null) {
+                    User user = new User();
+                    user.setStuNum(stuNum);
+                    user.setPassword(Base64Util.encode(password));
+                    user.setStuName(stuName);
+                    userMapper.addUser(user);
+                }
                 return message.success();
             }
         } catch (IOException ex) {
